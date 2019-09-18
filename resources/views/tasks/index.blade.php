@@ -6,8 +6,8 @@
 
 @section('content')
     <div class="container-fluid">
+        <a href="{{route('tasks.add')}}" class="btn btn-outline-primary float-right">Add</a>
         <h3>Tasks</h3>
-        <a href="{{route()}}">Add</a>
         <hr>
     </div>
 @endsection
