@@ -12,7 +12,10 @@ class Task extends Model
     public $table = "";
 
     protected $fillable = [
-        'id', 'category', 'priority', 'title', 'desc', 'minutes', 'estMinutes', 'startDateTime', 'endDateTime', 'status', 'flag', 'shared'
+        'id', 'category', 'priority', 'title',
+        'desc', 'minutes', 'estMinutes',
+        'startDateTime', 'endDateTime',
+        'status', 'flag', 'shared'
     ];
 
 

@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 //Auth::routes(['verify' => true]);
 
+//TODO: ADD LOTS OF MIDDLEWARE!!
+
 //Misc Routes
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'HomeController@profile')->name('profile');
