@@ -9,14 +9,13 @@ class Task extends Model
 {
     use SoftDeletes;
 
-    public $table = "";
+    protected $table = "task";
 
     protected $fillable = [
-        'id', 'category', 'priority', 'title',
-        'desc', 'minutes', 'estMinutes',
-        'startDateTime', 'endDateTime',
+        'id', 'userID',  'category', 'priority', 'title',
+        'desc', 'minutes', 'est_Minutes',
+        'start_date', 'end_Date',
         'status', 'flag', 'shared'
     ];
-
 
 }

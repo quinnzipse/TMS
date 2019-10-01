@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests\AddTask;
 use App\Task;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
     function index(){
-        return view('tasks/index');
+        $tasks = Task::where('uid', '=', Auth::user()->id)->get();
+
+        return view('tasks/index', ['tasks' => $tasks]);
     }
 
     function add(){
@@ -20,10 +22,19 @@ class TaskController extends Controller
 
     function addProcess(AddTask $request){
         $task = new Task();
+        $task->uid = Auth::user()->id;
         $task->desc = $request->get('desc');
-        $task->name = $request->get('name');
+        $task->title = $request->get('name');
         $task->priority = $request->get('priority');
-        //TODO: add some business logic here
+        if($request->get('category')) {
+            $task->category = $request->get('category');
+        } else {
+            $task->category = 'default';
+        }
+        $task->est_Minutes = $request->get('timeMin');
+
+        $task->save();
+
         return view('tasks.index');
     }
 
@@ -32,7 +43,10 @@ class TaskController extends Controller
     }
 
     function edit($task){
-        return view('tasks/edit');
+        // TODO: Add some security here to prevent random people from accessing tasks
+        $cats = Category::get();
+        $task = Task::where('id', '=', $task)->first();
+        return view('tasks/modify', ['task' => $task, 'cats' => $cats]);
     }
 
     function editProcess($task){

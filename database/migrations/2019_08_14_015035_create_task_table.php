@@ -16,13 +16,15 @@ class CreateTaskTable extends Migration
         Schema::create('task', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            $table->softDeletes();
+            $table->integer('uid');
             $table->text('category');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->date('start_date')->default(today());
+            $table->date('end_date')->nullable();
             $table->decimal('priority');
             $table->text('title');
             $table->text('desc')->nullable();
-            $table->mediumInteger('minutes');
+            $table->mediumInteger('minutes')->default(0);
             $table->mediumInteger('est_minutes')->nullable();
             $table->text('flag')->nullable();
             $table->json('shared_with')->nullable();
