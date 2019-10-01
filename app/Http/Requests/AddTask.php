@@ -27,15 +27,16 @@ class AddTask extends FormRequest
     public function rules()
     {
         return [
-//            'name' => 'required|between:0,50',
-//            'priority' => 'required|numeric|between:1,10',
+            'name' => 'required',
+//            'priority' => 'required|numeric|betweene:1,10',
 //            'timeMin' => 'required|numeric|between:0,10000'
+            'desc' => 'required'
         ];
     }
 
     public function messages(){
         return [
-//          'name.required' => 'Task name required',
+          'name.required' => 'Task name required',
 //            'name.between' => 'Character limit reached',
 //            'timeMin.between' => 'Invalid time estimate',
 //            'timeMin.required' => 'Please enter an estimated time',

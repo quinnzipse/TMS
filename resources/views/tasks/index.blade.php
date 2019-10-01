@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <a href="{{route('tasks.add')}}" class="btn btn-outline-primary float-right">Add</a>
+        <a href="{{route('tasks.add')}}" class="btn btn-outline-success float-right">Add</a>
         <h3>Tasks</h3>
         <hr>
     </div>

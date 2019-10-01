@@ -19,13 +19,10 @@ class TaskController extends Controller
     }
 
     function addProcess(AddTask $request){
-        var_dump($request->get('desc'));
-//        if($request->has('error')) return redirect()->route('tasks.add');
-        var_dump($request->get('desc'));
-//        $task = new Task();
-//
-//        $task->desc = $request->get('desc');
-
+        $task = new Task();
+        $task->desc = $request->get('desc');
+        $task->name = $request->get('name');
+        $task->priority = $request->get('priority');
         //TODO: add some business logic here
         return view('tasks.index');
     }

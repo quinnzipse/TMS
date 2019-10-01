@@ -14,13 +14,13 @@
                 <div class="col-lg-4">
                     <label for="name">Name</label>
                     <div class="input-group-sm">
-                        <input type="text" class="form-control" id="name" required>
+                        <input type="text" class="form-control" id="name" name="name" required>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <label for="category">Category</label>
                     <div class="input-group-sm">
-                        <select class="form-control" {{sizeof($categories) > 0 ? 'required' : 'disabled'}}>
+                        <select class="form-control" id="category" name="category" {{sizeof($categories) > 0 ? 'required' : 'disabled'}}>
                             @if(sizeof($categories) == 0)
                                 <option selected>No Categories Available</option>
                             @else
@@ -36,7 +36,7 @@
                     <label for="priority">Priority</label>
                     <div class="input-group-sm">
                         <!-- TODO: Design decision, should I make this a select with premade options or should I keep it as a number -->
-                        <input type="number" class="form-control" min="1" max="10" value="5" placeholder="5" id="priority">
+                        <input type="number" class="form-control" min="1" max="10" value="5" placeholder="5" id="priority" name="priority">
                    </div>
                 </div>
             </div>
@@ -45,26 +45,26 @@
                 <div class="col-lg-4">
                     <label for="timeMin">Estimated Time in Minutes</label>
                     <div class="input-group-sm">
-                        <input type="number" class="form-control" min="0" value="15" placeholder="15" id="timeMin">
+                        <input type="number" class="form-control" min="0" value="15" placeholder="15" id="timeMin" name="timeMin">
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <label for="desc">Description</label>
                     <div class="input-group-sm">
-                        <textarea type="text" class="form-control" placeholder="Enter a description here" id="desc">
+                        <textarea type="text" class="form-control" placeholder="Enter a description here" id="desc" name="desc">
                         </textarea>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <label for="dueDate">Due Date</label>
                     <div class="input-group-sm">
-                        <input type="date" class="form-control" id="dueDate">
+                        <input type="date" class="form-control" id="dueDate" name="dueDate">
                     </div>
                 </div>
             </div>
             <div class="mt-5">
-                <button type="submit" class="btn btn-success pr-4 pl-4 mr-2">Add</button>
-                <button type="button" onclick="goBack()" class="btn btn-warning">Cancel</button>
+                <button type="submit" class="btn btn-primary pr-4 pl-4 mr-2">Add</button>
+                <button type="button" onclick="goBack()" class="btn btn-outline-secondary">Cancel</button>
             </div>
         </form>
     </div>
