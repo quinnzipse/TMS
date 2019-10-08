@@ -35,7 +35,7 @@ class TaskController extends Controller
 
         $task->save();
 
-        return view('tasks.index');
+        redirect(route('tasks'));
     }
 
     function delete($task){
