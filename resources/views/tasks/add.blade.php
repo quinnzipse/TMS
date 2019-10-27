@@ -37,6 +37,9 @@
                     <div class="input-group-sm">
                         <!-- TODO: Design decision, should I make this a select with premade options or should I keep it as a number -->
                         <input type="number" class="form-control" min="1" max="10" value="5" placeholder="5" id="priority" name="priority">
+                        @if($errors->has('priority'))
+                            <div class="invalid-feedback">{{ $errors->first('priority') }}</div>
+                        @endif
                    </div>
                 </div>
             </div>
@@ -46,6 +49,9 @@
                     <label for="timeMin">Estimated Time in Minutes</label>
                     <div class="input-group-sm">
                         <input type="number" class="form-control" min="0" value="15" placeholder="15" id="timeMin" name="timeMin">
+                        @if($errors->has('name'))
+                            <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -53,12 +59,18 @@
                     <div class="input-group-sm">
                         <textarea type="text" class="form-control" placeholder="Enter a description here" id="desc" name="desc">
                         </textarea>
+                        @if($errors->has('name'))
+                            <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <label for="dueDate">Due Date</label>
                     <div class="input-group-sm">
                         <input type="date" class="form-control" id="dueDate" name="dueDate">
+                        @if($errors->has('name'))
+                            <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -71,10 +83,10 @@
 
     <script type="text/javascript">
         function goBack(){
-            history.back();
-            //This is a bad idea FIXME
+            window.location = '/tasks';
         }
 
+        //TODO: this needs some help if I would like to implement it
         function youSure(){
             swal({
                 title: "Are you sure?",
@@ -86,6 +98,10 @@
                         text: "Yeet",
                         visible: true,
                     }
+                }
+            }).then((result) => {
+                if(result.value){
+                    window.location = '/tasks';
                 }
             });
         }

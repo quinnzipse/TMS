@@ -54,8 +54,13 @@
                 </div>
             </div>
             <br>
-            <button class="btn btn-sm btn-outline-success">Edit</button>
-            <button class="btn btn-sm btn-outline-secondary">Cancel</button>
+            <button type="submit" class="btn btn-sm btn-outline-success">Edit</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="goBack()">Cancel</button>
         </form>
     </div>
+    <script type="text/javascript">
+        function goBack(){
+            window.location = '/tasks';
+        }
+    </script>
 @endsection

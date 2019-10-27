@@ -18,6 +18,7 @@
                 <th>Priority</th>
                 <th>Time left</th>
                 <th>Flag</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -28,6 +29,7 @@
                     <td>{{$t->priority}}</td>
                     <td>{{$t->est_Minutes}}</td>
                     <td>{{$t->flag}}</td>
+                    <td class="mr-0"><button class="btn btn-outline-danger btn-sm">Delete</button></td>
                 </tr>
             @endforeach
             </tbody>

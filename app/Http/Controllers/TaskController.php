@@ -9,8 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     function index(){
-        $tasks = Task::where('uid', '=', Auth::user()->id)->get();
+        $tasks = Task::where('uid', '=', Auth::user()->id)->orderBy('priority', 'asc')->orderBy('est_Minutes', 'asc')->get();
 
         return view('tasks/index', ['tasks' => $tasks]);
     }
@@ -35,7 +40,7 @@ class TaskController extends Controller
 
         $task->save();
 
-        redirect(route('tasks'));
+        return redirect(route('tasks'));
     }
 
     function delete($task){
@@ -49,8 +54,21 @@ class TaskController extends Controller
         return view('tasks/modify', ['task' => $task, 'cats' => $cats]);
     }
 
-    function editProcess($task){
-        //TODO: add some logic here
+    function editProcess(EditTask $request){
+        $task = Task::where('id', '=', $request->get('taskID'))->first();
+        $task->desc = $request->get('desc');
+        $task->title = $request->get('name');
+        $task->priority = $request->get('priority');
+        if($request->get('category')) {
+            $task->category = $request->get('category');
+        } else {
+            $task->category = 'default';
+        }
+        $task->minutes += $request->get('minElapsed');
+
+        $task->save();
+
+        return redirect(route('tasks'));
     }
 
     function view($task){
