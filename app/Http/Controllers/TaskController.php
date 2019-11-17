@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Http\Requests\AddTask;
+use App\Http\Requests\EditTask;
 use App\Task;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,7 @@ class TaskController extends Controller
     }
 
     function index(){
-        $tasks = Task::where('uid', '=', Auth::user()->id)->orderBy('priority', 'asc')->orderBy('est_Minutes', 'asc')->get();
+        $tasks = Task::where('uid', '=', Auth::user()->id)->orderBy('end_date', 'asc')->orderBy('priority', 'asc')->orderBy('est_Minutes', 'asc')->get();
 
         return view('tasks/index', ['tasks' => $tasks]);
     }
@@ -37,26 +38,29 @@ class TaskController extends Controller
             $task->category = 'default';
         }
         $task->est_Minutes = $request->get('timeMin');
+        $task->end_date = $request->get('dueDate');
 
         $task->save();
 
         return redirect(route('tasks'));
     }
 
-    function delete($task){
-        //TODO: add some logic here
+    function delete(Task $task){
+        $task->delete();
+
+        return redirect(route('tasks'));
     }
 
-    function edit($task){
+    function edit(Task $task){
         // TODO: Add some security here to prevent random people from accessing tasks
         $cats = Category::get();
-        $task = Task::where('id', '=', $task)->first();
+        $task = Task::where('id', '=', $task->id)->first();
         return view('tasks/modify', ['task' => $task, 'cats' => $cats]);
     }
 
-    function editProcess(EditTask $request){
-        $task = Task::where('id', '=', $request->get('taskID'))->first();
+    function editProcess(EditTask $request, Task $task){
         $task->desc = $request->get('desc');
+        $task->end_date = $request->get('dueDate');
         $task->title = $request->get('name');
         $task->priority = $request->get('priority');
         if($request->get('category')) {
@@ -64,6 +68,7 @@ class TaskController extends Controller
         } else {
             $task->category = 'default';
         }
+        $task->est_minutes = $request->get('timeMin');
         $task->minutes += $request->get('minElapsed');
 
         $task->save();

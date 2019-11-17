@@ -30,9 +30,9 @@ Route::post('/profile/edit', 'HomeController@profileEditProcess')->name('profile
 Route::get('/tasks', 'TaskController@index')->name('tasks');
 Route::get('/tasks/add', 'TaskController@add')->name('tasks.add');
 Route::post('/tasks/add', 'TaskController@addProcess')->name('tasks.add');
-Route::post('/tasks/{task}/delete', 'TaskController@delete')->name('tasks.delete');
+Route::get('/tasks/{task}/delete', 'TaskController@delete')->name('tasks.delete');
 Route::get('/tasks/{task}/edit', 'TaskController@edit')->name('tasks.edit');
-Route::post('/tasks/{task}/edit', 'TaskController@editProcess')->name('tasks.edit');
+Route::post('/tasks/edit/{task}', 'TaskController@editProcess')->name('tasks.edit');
 Route::get('/tasks/{task}/view', 'TaskCotnroller@view')->name('tasks.view');
 
 //Setting Routes

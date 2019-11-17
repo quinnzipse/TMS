@@ -49,8 +49,8 @@
                     <label for="timeMin">Estimated Time in Minutes</label>
                     <div class="input-group-sm">
                         <input type="number" class="form-control" min="0" value="15" placeholder="15" id="timeMin" name="timeMin">
-                        @if($errors->has('name'))
-                            <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                        @if($errors->has('timeMin'))
+                            <div class="invalid-feedback">{{ $errors->first('timeMin') }}</div>
                         @endif
                     </div>
                 </div>
@@ -59,8 +59,8 @@
                     <div class="input-group-sm">
                         <textarea type="text" class="form-control" placeholder="Enter a description here" id="desc" name="desc">
                         </textarea>
-                        @if($errors->has('name'))
-                            <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                        @if($errors->has('desc'))
+                            <div class="invalid-feedback">{{ $errors->first('desc') }}</div>
                         @endif
                     </div>
                 </div>
@@ -68,8 +68,8 @@
                     <label for="dueDate">Due Date</label>
                     <div class="input-group-sm">
                         <input type="date" class="form-control" id="dueDate" name="dueDate">
-                        @if($errors->has('name'))
-                            <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                        @if($errors->has('dueDate'))
+                            <div class="invalid-feedback">{{ $errors->first('dueDate') }}</div>
                         @endif
                     </div>
                 </div>
