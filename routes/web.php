@@ -34,6 +34,8 @@ Route::get('/tasks/{task}/delete', 'TaskController@delete')->name('tasks.delete'
 Route::get('/tasks/{task}/edit', 'TaskController@edit')->name('tasks.edit');
 Route::post('/tasks/edit/{task}', 'TaskController@editProcess')->name('tasks.edit');
 Route::get('/tasks/{task}/view', 'TaskCotnroller@view')->name('tasks.view');
+Route::get('/tasks/{task}/start', 'TaskController@startClock')->name('tasks.start');
+Route::get('/tasks/{task}/end', 'TaskController@endClock')->name('tasks.end');
 
 //Setting Routes
 Route::get('/settings', 'SettingsController@index')->name('settings');

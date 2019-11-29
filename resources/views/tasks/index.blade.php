@@ -45,5 +45,19 @@
         function editTask(id){
             window.location = '/tasks/' + id + '/edit';
         }
+        function startTime(id){
+            $.ajax({
+                async: true,
+                type: 'get',
+                url: '/tasks/' + id + '/start'
+            });
+        }
+        function endTime(id){
+            $.ajax({
+                async: true,
+                type: 'get',
+                url: '/tasks/' + id + '/end'
+            });
+        }
     </script>
 @endsection

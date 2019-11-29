@@ -18,8 +18,8 @@ class CreateTimeCardTable extends Migration
             $table->mediumInteger('tid');
             $table->timestamps();
             $table->timestamp('in');
-            $table->timestamp('out');
-            $table->integer('diff');
+            $table->timestamp('out')->nullable(true);
+            $table->integer('diff')->default(-1);
         });
     }
 

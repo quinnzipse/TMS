@@ -6,6 +6,9 @@ use App\Category;
 use App\Http\Requests\AddTask;
 use App\Http\Requests\EditTask;
 use App\Task;
+use App\TimeCard;
+use Carbon\Carbon;
+use Carbon\Traits\Boundaries;
 use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
@@ -24,6 +27,29 @@ class TaskController extends Controller
     function add(){
         $cat = Category::get();
         return view('tasks/add', ['categories' => $cat]);
+    }
+
+    function startClock(Task $task){
+        $time_card = new TimeCard();
+        $time_card->in = Carbon::now();
+        $time_card->tid = $task->id;
+        $time_card->save();
+    }
+
+    function endClock(Task $task){
+        $time_card = TimeCard::where('tid', '=', $task->id)->orderBy('in', 'desc')->first();
+        $time_card->out = Carbon::now();
+        $time_card->diff = $this->calcTime($time_card);
+        $time_card->save();
+    }
+
+    function calcTime(TimeCard $timeCard){
+        $in = Carbon::parse($timeCard->in);
+
+        // Simple debug - check network tab.
+        echo $in->diffInMinutes($timeCard->out);
+
+        return $in->diffInRealMinutes($timeCard->out);
     }
 
     function addProcess(AddTask $request){
