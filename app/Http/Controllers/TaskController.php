@@ -30,6 +30,9 @@ class TaskController extends Controller
     }
 
     function startClock(Task $task){
+        if($task->uid != Auth::id()) // in the future, I may want to share this with others.
+            abort(403, "uid incorrect for this task. You do not have permission to edit this.");
+
         $time_card = new TimeCard();
         $time_card->in = Carbon::now();
         $time_card->tid = $task->id;
@@ -37,6 +40,9 @@ class TaskController extends Controller
     }
 
     function endClock(Task $task){
+        if($task->uid != Auth::id()) // in the future, I may want to share this with others.
+            abort(403, "uid incorrect for this task. You do not have permission to edit this.");
+
         $time_card = TimeCard::where('tid', '=', $task->id)->orderBy('in', 'desc')->first();
         $time_card->out = Carbon::now();
         $time_card->diff = $this->calcTime($time_card);
