@@ -13,7 +13,7 @@ class Task extends Model
 
     protected $fillable = [
         'id', 'uid',  'category', 'priority', 'title',
-        'desc', 'minutes', 'est_Minutes',
+        'desc', 'minutes', 'est_minutes',
         'start_date', 'end_Date',
         'status', 'flag', 'shared'
     ];

@@ -29,7 +29,7 @@
                     <td>{{$t->priority}}</td>
                     <td>{{$t->est_minutes}} mins</td>
                     <td>{{$t->flag}}</td>
-                    <td class="ml-0 mr-0 pr-1 pl-1"><button type="button" onclick="startTime({{$t->id}})" id="stopWatchButton{{$t->id}}" class="btn btn-outline-secondary btn-sm"><i class="fas fa-stopwatch"></i></button></td>
+                    <td class="ml-0 mr-0 pr-1 pl-1"><button type="button" onclick="time({{$t->id}})" id="stopWatchButton{{$t->id}}" class="btn btn-outline-secondary btn-sm"><i class="fas fa-stopwatch"></i></button></td>
                     <td class="mr-0 pr-1 pl-1"><button type="button" onclick="editTask({{$t->id}})" class="btn btn-outline-primary btn-sm"><i class="far fa-edit"></i></button></td>
                     <td class="ml-0 mr-0 pr-1 pl-1"><button type="button" onclick="deleteTask({{$t->id}})" class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt"></i></button></td>
                 </tr>
@@ -45,7 +45,7 @@
         function editTask(id){
             window.location = '/tasks/' + id + '/edit';
         }
-        function startTime(id){
+        function time(id){
             let button = $('#stopWatchButton' + id),
                 row = button.parent().parent(), task = 'end',
                 buttonStartColor = 'btn-outline-secondary',
@@ -71,6 +71,18 @@
                 async: true,
                 type: 'get',
                 url: '/tasks/' + id + '/' + task
+            }).done(function(result){
+                $.ajax({
+                    async: true,
+                    type: 'get',
+                    url: '/tasks/' + id + '/estTime',
+                    success: function(result){
+
+                    },
+                    error: function(){
+
+                    }
+                });
             });
 
         }

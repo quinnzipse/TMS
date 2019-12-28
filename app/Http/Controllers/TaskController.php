@@ -34,7 +34,6 @@ class TaskController extends Controller
             abort(403, "uid incorrect for this task. You do not have permission to edit this.");
 
         $time_card = new TimeCard();
-        $time_card->in = Carbon::now();
         $time_card->tid = $task->id;
         $time_card->save();
     }
@@ -43,19 +42,22 @@ class TaskController extends Controller
         if($task->uid != Auth::id()) // in the future, I may want to share this with others.
             abort(403, "uid incorrect for this task. You do not have permission to edit this.");
 
-        $time_card = TimeCard::where('tid', '=', $task->id)->orderBy('in', 'desc')->first();
-        $time_card->out = Carbon::now();
+        $time_card = TimeCard::where('tid', '=', $task->id)->orderBy('created_at', 'desc')->first();
         $time_card->diff = $this->calcTime($time_card);
         $time_card->save();
+
+        $task->est_minutes = $task->est_minutes - $time_card->diff;
+        echo "\n" . $task->est_minutes;
+        $task->save();
     }
 
     function calcTime(TimeCard $timeCard){
-        $in = Carbon::parse($timeCard->in);
+        $in = Carbon::parse($timeCard->created_at);
 
         // Simple debug - check network tab.
-        echo $in->diffInMinutes($timeCard->out);
+        echo round($in->diffInMinutes(Carbon::now()));
 
-        return $in->diffInRealMinutes($timeCard->out);
+        return round($in->diffInRealMinutes(Carbon::now()));
     }
 
     function addProcess(AddTask $request){
@@ -106,6 +108,10 @@ class TaskController extends Controller
         $task->save();
 
         return redirect(route('tasks'));
+    }
+
+    function checkTime(Task $task){
+        return $task->est_minutes;
     }
 
     function view($task){
