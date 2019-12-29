@@ -27,9 +27,9 @@
                     <td class="text-truncate">{{$t->title}}</td>
                     <td>{{$t->category}}</td>
                     <td>{{$t->priority}}</td>
-                    <td>{{$t->est_minutes}} mins</td>
+                    <td id="min{{$t->id}}">{{$t->est_minutes}} mins</td>
                     <td>{{$t->flag}}</td>
-                    <td class="ml-0 mr-0 pr-1 pl-1"><button type="button" onclick="time({{$t->id}})" id="stopWatchButton{{$t->id}}" class="btn btn-outline-secondary btn-sm"><i class="fas fa-stopwatch"></i></button></td>
+                    <td class="ml-0 mr-0 pr-1 pl-1"><button type="button" onclick="time({{$t->id}})" id="stopWatchButton{{$t->id}}" class="btn {{ $t->in_use ? 'btn-outline-success' : 'btn-outline-secondary' }} btn-sm"><i class="fas fa-stopwatch"></i></button></td>
                     <td class="mr-0 pr-1 pl-1"><button type="button" onclick="editTask({{$t->id}})" class="btn btn-outline-primary btn-sm"><i class="far fa-edit"></i></button></td>
                     <td class="ml-0 mr-0 pr-1 pl-1"><button type="button" onclick="deleteTask({{$t->id}})" class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt"></i></button></td>
                 </tr>
@@ -38,7 +38,12 @@
         </table>
 
     </div>
+
     <script>
+        let buttonStartColor = 'btn-outline-secondary',
+            buttonEndColor = 'btn-outline-success',
+            rowActiveColor = '';
+
         function deleteTask(id){
             window.location = '/tasks/' + id + '/delete';
         }
@@ -47,10 +52,7 @@
         }
         function time(id){
             let button = $('#stopWatchButton' + id),
-                row = button.parent().parent(), task = 'end',
-                buttonStartColor = 'btn-outline-secondary',
-                buttonEndColor = 'btn-outline-success',
-                rowActiveColor = '';
+                row = button.parent().parent(), task = 'end';
 
             if(button.hasClass(buttonStartColor)) {
                 console.log("Starting the timer");
@@ -62,7 +64,6 @@
                 task = 'start';
             } else {
                 console.log("Ending the timer");
-                // button.blur();
                 button.removeClass(buttonEndColor).addClass(buttonStartColor).blur();
                 row.removeClass(rowActiveColor);
             }
@@ -72,29 +73,27 @@
                 type: 'get',
                 url: '/tasks/' + id + '/' + task
             }).done(function(result){
-                $.ajax({
-                    async: true,
-                    type: 'get',
-                    url: '/tasks/' + id + '/estTime',
-                    success: function(result){
-
-                    },
-                    error: function(){
-
-                    }
-                });
+                // This ajax call updates the time.
+                // It only gets called if you are ending a timer.
+                if(task === 'end') {
+                    $.ajax({
+                        async: true,
+                        type: 'get',
+                        url: '/tasks/' + id + '/estTime',
+                        success: function (result) {
+                            console.log("success");
+                            console.log(result);
+                            $("#min" + id).text(result + " mins");
+                        },
+                        error: function (error) {
+                            console.log("failed.");
+                            console.log(error);
+                        }
+                    });
+                }
             });
 
         }
-        // function endTime(id){
-        //
-        //
-        //
-        //     $.ajax({
-        //         async: true,
-        //         type: 'get',
-        //         url: '/tasks/' + id + '/end'
-        //     });
-        // }
+
     </script>
 @endsection

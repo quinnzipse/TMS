@@ -36,6 +36,9 @@ class TaskController extends Controller
         $time_card = new TimeCard();
         $time_card->tid = $task->id;
         $time_card->save();
+
+        $task->in_use = true;
+        $task->save();
     }
 
     function endClock(Task $task){
@@ -48,6 +51,7 @@ class TaskController extends Controller
 
         $task->est_minutes = $task->est_minutes - $time_card->diff;
         echo "\n" . $task->est_minutes;
+        $task->in_use = false;
         $task->save();
     }
 
