@@ -24,7 +24,7 @@
             <tbody>
             @foreach($tasks as $t)
                 <tr>
-                    <td class="text-truncate">{{$t->title}}</td>
+                    <td class="text-truncate" id="title{{$t->id}}">{{$t->title}}</td>
                     <td>{{$t->category}}</td>
                     <td>{{$t->priority}}</td>
                     <td id="min{{$t->id}}">{{$t->est_minutes}} mins</td>
@@ -81,13 +81,28 @@
                         type: 'get',
                         url: '/tasks/' + id + '/estTime',
                         success: function (result) {
-                            console.log("success");
-                            console.log(result);
                             $("#min" + id).text(result + " mins");
-                        },
-                        error: function (error) {
-                            console.log("failed.");
-                            console.log(error);
+                            if(result <= 0){
+                                Swal.fire({
+                                    title: 'Is "' + $("#title" + id).text() + '" complete?',
+                                    // text: 'Would you like me to mark it as complete or add more time?',
+                                    icon: 'question',
+                                    allowOutsideClick: false,
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Mark as Done',
+                                    cancelButtonText: 'Add Time',
+                                }).then((result) => {
+                                    if(result.value){
+                                        Swal.fire({
+
+                                        });
+                                    } else {
+                                        Swal.fire({
+
+                                        });
+                                    }
+                                });
+                            }
                         }
                     });
                 }
