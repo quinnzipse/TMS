@@ -25,10 +25,10 @@
                 <h5>Click a tab above to continue</h5>
             </div>
             <div class="tab-pane fade" id="categories" role="tabpanel" aria-labelledby="pill-categories">
-                @include('settings.flagHome')
+                @include('settings.categoryHome')
             </div>
             <div class="tab-pane fade" id="flags" role="tabpanel" aria-labelledby="pill-flags">
-                @include('settings.categoryHome')
+                @include('settings.flagHome')
             </div>
         </div>
     </div>
