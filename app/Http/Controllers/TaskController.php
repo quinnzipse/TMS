@@ -18,7 +18,7 @@ class TaskController extends Controller
         $this->middleware('auth');
     }
 
-    function index(){
+    static function index(){
         $tasks = Task::where('uid', '=', Auth::user()->id)->orderBy('end_date', 'asc')->orderBy('priority', 'asc')->orderBy('est_Minutes', 'asc')->get();
 
         return view('tasks/index', ['tasks' => $tasks]);
