@@ -37,6 +37,8 @@ Route::get('/tasks/{task}/view', 'TaskCotnroller@view')->name('tasks.view');
 Route::get('/tasks/{task}/start', 'TaskController@startClock')->name('tasks.start');
 Route::get('/tasks/{task}/end', 'TaskController@endClock')->name('tasks.end');
 Route::get('/tasks/{task}/estTime', 'TaskController@checkTime')->name('tasks.time');
+Route::post('/tasks/{task}/addTime/{time}', 'TaskController@addTime')->name('tasks.time.add');
+Route::get('/tasks/{task}/done', 'TaskController@markAsDone')->name('tasks.done');
 
 //Setting Routes
 Route::get('/settings', 'SettingsController@index')->name('settings');
