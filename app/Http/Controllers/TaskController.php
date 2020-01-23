@@ -84,7 +84,7 @@ class TaskController extends Controller
     }
 
     function delete(Task $task){
-        $task->delete();
+        $task->forceDelete();
 
         return redirect(route('tasks'));
     }
@@ -120,5 +120,20 @@ class TaskController extends Controller
 
     function view($task){
         return view('tasks/view');
+    }
+
+    function addTime(Task $task, int $time){
+        $task->est_minutes = $time;
+        $task->save();
+        return $this->checkTime($task);
+    }
+
+    function markAsDone(Task $task){
+        try {
+            $task->delete();
+        } catch (\Exception $e) {
+            return "failed to delete";
+        }
+        return "success";
     }
 }
