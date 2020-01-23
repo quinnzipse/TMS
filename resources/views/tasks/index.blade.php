@@ -160,7 +160,10 @@
                                             allowEscapeKey: false,
                                             inputValidator: (value) => {
                                                 if (value <= 0) {
-                                                    return 'The value needs to be greater than 0'
+                                                    return 'The value must be greater than 0';
+                                                }
+                                                if(isNaN(value)){
+                                                    return 'The value must be numeric';
                                                 }
                                             },
                                             preConfirm: (time) => {
