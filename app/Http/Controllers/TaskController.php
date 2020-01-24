@@ -8,7 +8,6 @@ use App\Http\Requests\EditTask;
 use App\Task;
 use App\TimeCard;
 use Carbon\Carbon;
-use Carbon\Traits\Boundaries;
 use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
@@ -26,7 +25,8 @@ class TaskController extends Controller
 
     function add(){
         $cat = Category::get();
-        return view('tasks/add', ['categories' => $cat]);
+        $date = Carbon::tomorrow()->toDateString();
+        return view('tasks/add', ['categories' => $cat, 'date' => $date]);
     }
 
     function startClock(Task $task){

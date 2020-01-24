@@ -67,7 +67,7 @@
                 <div class="col-lg-4">
                     <label for="dueDate">Due Date</label>
                     <div class="input-group-sm">
-                        <input type="date" class="form-control" id="dueDate" name="dueDate">
+                        <input type="date" class="form-control" id="dueDate" name="dueDate" value="{{$date}}">
                         @if($errors->has('dueDate'))
                             <div class="invalid-feedback">{{ $errors->first('dueDate') }}</div>
                         @endif
