@@ -11,7 +11,10 @@
                 <div class="col-md-5">
                     <div class="input-group-sm">
                         <label for="name">Name</label>
-                        <input type="text" id="name" class="form-control input-group-sm" name="name" value="{{$task->title}}">
+                        <input type="text" id="name" class="{{ $errors->has('name') ? 'is-invalid': '' }} form-control input-group-sm" name="name" value="{{$task->title}}">
+                        @if($errors->has('name'))
+                            <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-md-5">
@@ -34,7 +37,10 @@
                 <div class="col-md-2">
                     <div class="input-group-sm">
                         <label for="priority">Priority</label>
-                        <input type="number" class="form-control" name="priority" id="priority" value="{{$task->priority}}" min="1" max="10">
+                        <input type="number" class="{{ $errors->has('priority') ? 'is-invalid': '' }} form-control" name="priority" id="priority" value="{{$task->priority}}" min="1" max="10">
+                        @if($errors->has('priority'))
+                            <div class="invalid-feedback">{{ $errors->first('priority') }}</div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -43,7 +49,10 @@
                 <div class="col-md-3">
                     <div class="input-group-sm">
                         <label for="timeMin">Estimated Time in Minutes</label>
-                        <input type="number" class="form-control" id="timeMin" name="timeMin" min="0" value="{{$task->est_minutes}}">
+                        <input type="number" class="form-control {{ $errors->has('timeMin') ? 'is-invalid' : '' }}" id="timeMin" name="timeMin" min="1" value="{{$task->est_minutes}}">
+                        @if($errors->has('timeMin'))
+                            <div class="invalid-feedback">{{ $errors->first('timeMin') }}</div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -55,7 +64,7 @@
                 <div class="col-lg-5">
                     <label for="desc">Description</label>
                     <div class="input-group-sm">
-                        <textarea type="text" class="form-control" placeholder="Enter a description here" id="desc" name="desc" >{{$task->desc}}</textarea>
+                        <textarea type="text" class="form-control" placeholder="Enter a description here" id="desc" name="desc">{{$task->desc}}</textarea>
                         @if($errors->has('desc'))
                             <div class="invalid-feedback">{{ $errors->first('desc') }}</div>
                         @endif

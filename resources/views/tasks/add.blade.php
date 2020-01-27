@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
     <div class="container-fluid">
         <h3>Add a Task</h3>
         <hr>
@@ -14,7 +15,10 @@
                 <div class="col-lg-4">
                     <label for="name">Name</label>
                     <div class="input-group-sm">
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <input type="text" class="{{ $errors->has('name') ? 'is-invalid' : '' }} form-control" id="name" name="name" value="{{old('name')}}">
+                        @if($errors->has('name'))
+                            <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -36,7 +40,7 @@
                     <label for="priority">Priority</label>
                     <div class="input-group-sm">
                         <!-- TODO: Design decision, should I make this a select with premade options or should I keep it as a number -->
-                        <input type="number" class="form-control" min="1" max="10" value="5" placeholder="5" id="priority" name="priority">
+                        <input type="number" class="{{$errors->has('priority') ? 'is-invalid' : '' }} form-control" min="1" max="10" value="{{old('priority') != '' ? old('priority') : 5}}" placeholder="5" id="priority" name="priority">
                         @if($errors->has('priority'))
                             <div class="invalid-feedback">{{ $errors->first('priority') }}</div>
                         @endif
@@ -48,7 +52,7 @@
                 <div class="col-lg-4">
                     <label for="timeMin">Estimated Time in Minutes</label>
                     <div class="input-group-sm">
-                        <input type="number" class="form-control" min="0" value="15" placeholder="15" id="timeMin" name="timeMin">
+                        <input type="number" class="{{$errors->has('timeMin') ? 'is-invalid' : ''}} form-control" min="0" value="{{old('timeMin') != '' ? old('timeMin') : 15 }}" placeholder="15" id="timeMin" name="timeMin">
                         @if($errors->has('timeMin'))
                             <div class="invalid-feedback">{{ $errors->first('timeMin') }}</div>
                         @endif
@@ -57,7 +61,7 @@
                 <div class="col-lg-4">
                     <label for="desc">Description</label>
                     <div class="input-group-sm">
-                        <textarea type="text" class="form-control" placeholder="Enter a description here" id="desc" name="desc">
+                        <textarea type="text" class="{{ $errors->has('desc') ? 'is-invalid' : '' }} form-control" placeholder="Enter a description here" id="desc" name="desc">
                         </textarea>
                         @if($errors->has('desc'))
                             <div class="invalid-feedback">{{ $errors->first('desc') }}</div>
@@ -67,7 +71,7 @@
                 <div class="col-lg-4">
                     <label for="dueDate">Due Date</label>
                     <div class="input-group-sm">
-                        <input type="date" class="form-control" id="dueDate" name="dueDate">
+                        <input type="date" class="{{ $errors->has('dueDate') ? 'is-invalid' : '' }}form-control" id="dueDate" name="dueDate" value="{{old('dueDate')}}">
                         @if($errors->has('dueDate'))
                             <div class="invalid-feedback">{{ $errors->first('dueDate') }}</div>
                         @endif
@@ -85,6 +89,10 @@
         function goBack(){
             window.location = '/tasks';
         }
+
+        document.addEventListener("DOMContentLoaded", function(){
+            $('#desc').innerText = "{{old('desc')}}";
+        });
 
         //TODO: this needs some help if I would like to implement it
         function youSure(){

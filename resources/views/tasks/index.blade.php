@@ -12,14 +12,14 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th width="30%">Title</th>
-                <th width="25%">Category</th>
-                <th width="15%">Priority</th>
-                <th width="20%">Time left</th>
-                <th width="10%">Flag</th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th style="width: 25%">Title</th>
+                <th style="width: 22%">Category</th>
+                <th style="width: 14%">Priority</th>
+                <th style="width: 14%">Time left</th>
+                <th style="width: 10%">Flag</th>
+                <th style="width: 5%"></th>
+                <th style="width: 5%"></th>
+                <th style="width: 5%"></th>
             </tr>
             </thead>
             <tbody>
@@ -32,16 +32,17 @@
                     <td>{{$t->flag}}</td>
                     <td class="ml-0 mr-0 pr-1 pl-1">
                         <button type="button" onclick="time({{$t->id}})" id="stopWatchButton{{$t->id}}"
-                                class="btn {{ $t->in_use ? 'btn-outline-success' : 'btn-outline-secondary' }} btn-sm"><i
+                                class="btn {{ $t->in_use ? 'btn-outline-success' : 'btn-outline-secondary' }}  btn-block
+                                btn-sm"><i
                                 class="fas fa-stopwatch"></i></button>
                     </td>
                     <td class="mr-0 pr-1 pl-1">
-                        <button type="button" onclick="editTask({{$t->id}})" class="btn btn-outline-primary btn-sm"><i
+                        <button type="button" onclick="editTask({{$t->id}})" class="btn btn-outline-primary btn-sm oBut{{$t->id}}"><i
                                 class="far fa-edit"></i></button>
                     </td>
                     <td class="ml-0 mr-0 pr-1 pl-1">
-                        <button type="button" onclick="deleteTask({{$t->id}})" class="btn btn-outline-danger btn-sm"><i
-                                class="far fa-trash-alt"></i></button>
+                        <button type="button" onclick="markAsDone({{$t->id}})" class="btn btn-outline-success btn-sm oBut{{$t->id}}"><i
+                                class="fas fa-check"></i></button>
                     </td>
                 </tr>
             @endforeach
@@ -55,8 +56,31 @@
             buttonEndColor = 'btn-outline-success',
             rowActiveColor = '';
 
-        function deleteTask(id) {
-            window.location = '/tasks/' + id + '/delete';
+        function markAsDone(id){
+            let taskName = $("#title" + id).text();
+            $.ajax({
+                async: true,
+                type: 'get',
+                url: '/tasks/' + id + '/done'
+            }).then(function(result) {
+                console.log(result);
+                if(result === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: taskName + ' was marked as completed.',
+                        timer: 1560,
+                        timerProgressBar: true,
+                        footer: 'The window will automatically refresh.'
+                    }).then(function(){
+                        location.reload();
+                    });
+                } else {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'An error has occurred.'
+                    });
+                }
+            });
         }
 
         function editTask(id) {
@@ -70,8 +94,8 @@
             timer: 2000,
             timerProgressBar: true,
             onOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
             }
         });
 
@@ -82,7 +106,8 @@
             });
 
             let button = $('#stopWatchButton' + id),
-                row = button.parent().parent(), task = 'end';
+                row = button.parent().parent(), task = 'end',
+                oBut = $('.oBut' + id);
 
             if (button.hasClass(buttonStartColor)) {
                 console.log("Starting the timer");
@@ -90,12 +115,19 @@
                 button.removeClass(buttonStartColor);
                 button.addClass(buttonEndColor);
                 row.addClass(rowActiveColor);
-
+                button.parent().prop('colspan', 3);
+                oBut.each(function () {
+                    $(this).parent().prop('hidden', true);
+                });
                 task = 'start';
             } else {
                 console.log("Ending the timer");
                 button.removeClass(buttonEndColor).addClass(buttonStartColor).blur();
                 row.removeClass(rowActiveColor);
+                button.parent().prop('colspan', 1);
+                oBut.each(function () {
+                    $(this).parent().prop('hidden', false);
+                });
             }
 
             $.ajax({
@@ -123,29 +155,7 @@
                                     cancelButtonText: 'Add Time',
                                 }).then((result) => {
                                     if (result.value) {
-                                        $.ajax({
-                                            async: true,
-                                            type: 'get',
-                                            url: '/tasks/' + id + '/done'
-                                        }).then(function(result) {
-                                            console.log(result);
-                                            if(result === 'success') {
-                                                Swal.fire({
-                                                    icon: 'success',
-                                                    title: taskName + ' was marked as completed.',
-                                                    timer: 1560,
-                                                    timerProgressBar: true,
-                                                    footer: 'The window will automatically refresh.'
-                                                }).then(function(){
-                                                    location.reload();
-                                                });
-                                            } else {
-                                                Toast.fire({
-                                                    icon: 'error',
-                                                    title: 'An error has occurred.'
-                                                });
-                                            }
-                                        });
+                                        markAsDone(id);
                                     } else {
                                         Swal.fire({
                                             title: 'How much time should I add?',
