@@ -15,7 +15,8 @@
                 <div class="col-lg-4">
                     <label for="name">Name</label>
                     <div class="input-group-sm">
-                        <input type="text" class="{{ $errors->has('name') ? 'is-invalid' : '' }} form-control" id="name" name="name" value="{{old('name')}}">
+                        <input type="text" class="{{ $errors->has('name') ? 'is-invalid' : '' }} form-control" id="name"
+                               name="name" value="{{old('name')}}">
                         @if($errors->has('name'))
                             <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                         @endif
@@ -24,7 +25,8 @@
                 <div class="col-lg-4">
                     <label for="category">Category</label>
                     <div class="input-group-sm">
-                        <select class="form-control" id="category" name="category" {{sizeof($categories) > 0 ? 'required' : 'disabled'}}>
+                        <select class="form-control" id="category"
+                                name="category" {{sizeof($categories) > 0 ? 'required' : 'disabled'}}>
                             @if(sizeof($categories) == 0)
                                 <option selected>No Categories Available</option>
                             @else
@@ -40,11 +42,13 @@
                     <label for="priority">Priority</label>
                     <div class="input-group-sm">
                         <!-- TODO: Design decision, should I make this a select with premade options or should I keep it as a number -->
-                        <input type="number" class="{{$errors->has('priority') ? 'is-invalid' : '' }} form-control" min="1" max="10" value="{{old('priority') != '' ? old('priority') : 5}}" placeholder="5" id="priority" name="priority">
+                        <input type="number" class="{{$errors->has('priority') ? 'is-invalid' : '' }} form-control"
+                               min="1" max="10" value="{{old('priority') != '' ? old('priority') : 5}}" placeholder="5"
+                               id="priority" name="priority">
                         @if($errors->has('priority'))
                             <div class="invalid-feedback">{{ $errors->first('priority') }}</div>
                         @endif
-                   </div>
+                    </div>
                 </div>
             </div>
             <br>
@@ -52,7 +56,9 @@
                 <div class="col-lg-4">
                     <label for="timeMin">Estimated Time in Minutes</label>
                     <div class="input-group-sm">
-                        <input type="number" class="{{$errors->has('timeMin') ? 'is-invalid' : ''}} form-control" min="0" value="{{old('timeMin') != '' ? old('timeMin') : 15 }}" placeholder="15" id="timeMin" name="timeMin">
+                        <input type="number" class="{{$errors->has('timeMin') ? 'is-invalid' : ''}} form-control"
+                               min="0" value="{{old('timeMin') != '' ? old('timeMin') : 15 }}" placeholder="15"
+                               id="timeMin" name="timeMin">
                         @if($errors->has('timeMin'))
                             <div class="invalid-feedback">{{ $errors->first('timeMin') }}</div>
                         @endif
@@ -61,7 +67,8 @@
                 <div class="col-lg-4">
                     <label for="desc">Description</label>
                     <div class="input-group-sm">
-                        <textarea type="text" class="{{ $errors->has('desc') ? 'is-invalid' : '' }} form-control" placeholder="Enter a description here" id="desc" name="desc">
+                        <textarea type="text" class="{{ $errors->has('desc') ? 'is-invalid' : '' }} form-control"
+                                  placeholder="Enter a description here" id="desc" name="desc">
                         </textarea>
                         @if($errors->has('desc'))
                             <div class="invalid-feedback">{{ $errors->first('desc') }}</div>
@@ -71,7 +78,8 @@
                 <div class="col-lg-4">
                     <label for="dueDate">Due Date</label>
                     <div class="input-group-sm">
-                        <input type="date" class="{{ $errors->has('dueDate') ? 'is-invalid' : '' }}form-control" id="dueDate" name="dueDate" value="{{old('dueDate')}}">
+                        <input type="date" class="{{ $errors->has('dueDate') ? 'is-invalid' : '' }}form-control"
+                               id="dueDate" name="dueDate" value="{{old('dueDate') != '' ? old('dueDate') : $date }}">
                         @if($errors->has('dueDate'))
                             <div class="invalid-feedback">{{ $errors->first('dueDate') }}</div>
                         @endif
@@ -86,16 +94,16 @@
     </div>
 
     <script type="text/javascript">
-        function goBack(){
+        function goBack() {
             window.location = '/tasks';
         }
 
-        document.addEventListener("DOMContentLoaded", function(){
+        document.addEventListener("DOMContentLoaded", function () {
             $('#desc').innerText = "{{old('desc')}}";
         });
 
         //TODO: this needs some help if I would like to implement it
-        function youSure(){
+        function youSure() {
             swal({
                 title: "Are you sure?",
                 text: "You've worked so hard on this, are you sure you want to abandon it?",
@@ -108,7 +116,7 @@
                     }
                 }
             }).then((result) => {
-                if(result.value){
+                if (result.value) {
                     window.location = '/tasks';
                 }
             });

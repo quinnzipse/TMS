@@ -30,17 +30,17 @@
                     <td>{{$t->priority}}</td>
                     <td id="min{{$t->id}}">{{$t->est_minutes}} mins</td>
                     <td>{{$t->flag}}</td>
-                    <td class="ml-0 mr-0 pr-1 pl-1">
+                    <td class="ml-0 mr-0 pr-1 pl-1" colspan="{{$t->in_use ? '3' : '1'}}">
                         <button type="button" onclick="time({{$t->id}})" id="stopWatchButton{{$t->id}}"
                                 class="btn {{ $t->in_use ? 'btn-outline-success' : 'btn-outline-secondary' }}  btn-block
                                 btn-sm"><i
                                 class="fas fa-stopwatch"></i></button>
                     </td>
-                    <td class="mr-0 pr-1 pl-1">
+                    <td class="mr-0 pr-1 pl-1" colspan="{{$t->in_use ? '0' : '1'}}" {{$t->in_use ? 'hidden' : ''}}>
                         <button type="button" onclick="editTask({{$t->id}})" class="btn btn-outline-primary btn-sm oBut{{$t->id}}"><i
                                 class="far fa-edit"></i></button>
                     </td>
-                    <td class="ml-0 mr-0 pr-1 pl-1">
+                    <td class="ml-0 mr-0 pr-1 pl-1" colspan="{{$t->in_use ? '0' : '1'}}" {{$t->in_use ? 'hidden' : ''}}>
                         <button type="button" onclick="markAsDone({{$t->id}})" class="btn btn-outline-success btn-sm oBut{{$t->id}}"><i
                                 class="fas fa-check"></i></button>
                     </td>
