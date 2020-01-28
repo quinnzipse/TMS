@@ -6,9 +6,16 @@
 
 @section('content')
     <div class="container-fluid">
-        <a href="{{route('tasks.add')}}" class="btn btn-outline-success float-right"><i class="fas fa-plus"></i> Add
+        <a href="{{route('tasks.add')}}" class="btn btn-outline-success float-right mb-2"><i class="fas fa-plus"></i> Add
             Task</a>
-        <h3 class="mb-3"><i class="fas fa-tasks"></i> Tasks </h3>
+        <h3 class="mb-0 float-left"><i class="fas fa-tasks"></i> Tasks </h3>
+        <hr class="float-nonegit ">
+        <nav class="nav nav-pills nav-justified">
+            <a class="nav-link active" href="#">Active</a>
+            <a class="nav-link" href="#">Longer nav link</a>
+            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link disabled" href="#">Disabled</a>
+        </nav>
         <table class="table table-hover">
             <thead>
             <tr>
