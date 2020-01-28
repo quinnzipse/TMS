@@ -9,7 +9,7 @@
             @csrf
             <div class="row">
                 <div class="col-lg-4">
-                    <div class="input-group-sm">
+                    <div class="input-group-md">
                         <label for="name">Name</label>
                         <input type="text" id="name"
                                class="{{ $errors->has('name') ? 'is-invalid': '' }} form-control input-group-sm"
@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-lg-4">
                     <label for="category">Category</label>
-                    <div class="input-group-sm">
+                    <div class="input-group-md">
                         <select class="form-control" id="category"
                                 name="category" {{sizeof($cats) > 0 ? 'required' : 'disabled'}}>
                             @if(sizeof($cats) == 0)
@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="input-group-sm">
+                    <div class="input-group-md">
                         <label for="priority">Priority</label>
                         <input type="number" class="{{ $errors->has('priority') ? 'is-invalid': '' }} form-control"
                                name="priority" id="priority" value="{{$task->priority}}" min="1" max="10">
@@ -50,7 +50,7 @@
             <br>
             <div class="row">
                 <div class="col-lg-4">
-                    <div class="input-group-sm">
+                    <div class="input-group-md">
                         <label for="timeMin">Estimated Time in Minutes</label>
                         <input type="number" class="form-control {{ $errors->has('timeMin') ? 'is-invalid' : '' }}"
                                id="timeMin" name="timeMin" min="1" value="{{$task->est_minutes}}">
@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-lg-4">
                     <label for="desc">Description</label>
-                    <div class="input-group-sm">
+                    <div class="input-group-md">
                         <textarea type="text" class="form-control" placeholder="Enter a description here" id="desc"
                                   name="desc">{{$task->desc}}</textarea>
                         @if($errors->has('desc'))
@@ -70,16 +70,16 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="input-group-sm">
+                    <div class="input-group-md">
                         <label for="dueDate">Due Date</label>
                         <input type="date" class="form-control" id="dueDate" name="dueDate" value="{{$task->end_date}}">
                     </div>
                 </div>
             </div>
             <br>
-            <button type="submit" class="btn btn-sm btn-outline-success float-right">Edit</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary float-right mr-2" onclick="goBack()">Cancel</button>
-            <button type="button" class="btn btn-sm btn-outline-danger float-left" onclick="deleteTask({{$task->id}})">Delete</button>
+            <button type="submit" class="btn btn btn-outline-success float-right">Edit</button>
+            <button type="button" class="btn btn btn-outline-secondary float-right mr-2" onclick="goBack()">Cancel</button>
+            <button type="button" class="btn btn btn-outline-danger float-left" onclick="deleteTask({{$task->id}})">Delete</button>
         </form>
     </div>
     <script type="text/javascript">

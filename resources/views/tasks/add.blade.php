@@ -41,7 +41,6 @@
                 <div class="col-lg-4">
                     <label for="priority">Priority</label>
                     <div class="input-group-sm">
-                        <!-- TODO: Design decision, should I make this a select with premade options or should I keep it as a number -->
                         <input type="number" class="{{$errors->has('priority') ? 'is-invalid' : '' }} form-control"
                                min="1" max="10" value="{{old('priority') != '' ? old('priority') : 5}}" placeholder="5"
                                id="priority" name="priority">
@@ -57,7 +56,7 @@
                     <label for="timeMin">Estimated Time in Minutes</label>
                     <div class="input-group-sm">
                         <input type="number" class="{{$errors->has('timeMin') ? 'is-invalid' : ''}} form-control"
-                               min="0" value="{{old('timeMin') != '' ? old('timeMin') : 15 }}" placeholder="15"
+                               min="0" value="{{old('timeMin') != '' ? old('timeMin') : 45 }}" placeholder="45"
                                id="timeMin" name="timeMin">
                         @if($errors->has('timeMin'))
                             <div class="invalid-feedback">{{ $errors->first('timeMin') }}</div>
@@ -87,8 +86,8 @@
                 </div>
             </div>
             <div class="mt-5">
-                <button type="submit" class="btn btn-primary pr-4 pl-4 mr-2">Add</button>
-                <button type="button" onclick="goBack()" class="btn btn-outline-secondary">Cancel</button>
+                <button type="submit" class="btn btn-outline-success pr-4 pl-4 mr-2 float-right">Add</button>
+                <button type="button" onclick="goBack()" class="btn btn-outline-secondary mr-2 float-right">Cancel</button>
             </div>
         </form>
     </div>
