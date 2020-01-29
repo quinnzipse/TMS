@@ -6,15 +6,17 @@
 
 @section('content')
     <div class="container-fluid">
-        <a href="{{route('tasks.add')}}" class="btn btn-outline-success float-right mb-2"><i class="fas fa-plus"></i> Add
-            Task</a>
-        <h3 class="mb-0 float-left"><i class="fas fa-tasks"></i> Tasks </h3>
-        <hr class="float-nonegit ">
-        <nav class="nav nav-pills nav-justified">
+        <div class="row">
+            <button href="{{route('tasks.add')}}" class="btn btn-outline-success float-right"><i class="fas fa-plus"></i> Add
+                Task</button>
+            <h3 class="mb-0 float-left mt-2"><i class="fas fa-tasks"></i> Tasks </h3>
+        </div>
+        <br>
+        <hr class="mt-2">
+        <nav class="nav nav-pills nav-justified mt-2 mb-2">
             <a class="nav-link active" href="#">Active</a>
-            <a class="nav-link" href="#">Longer nav link</a>
-            <a class="nav-link" href="#">Link</a>
-            <a class="nav-link disabled" href="#">Disabled</a>
+            <a class="nav-link" href="#">Overdue</a>
+            <a class="nav-link" href="#">Completed</a>
         </nav>
         <table class="table table-hover">
             <thead>
