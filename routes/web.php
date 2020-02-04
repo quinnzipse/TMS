@@ -28,6 +28,8 @@ Route::post('/profile/edit', 'HomeController@profileEditProcess')->name('profile
 
 //Task Routes
 Route::get('/tasks', 'TaskController@index')->name('tasks');
+Route::get('/tasks/overdue', 'TaskController@indexOverdue')->name('tasks.overdue');
+Route::get('/tasks/done', 'TaskController@indexCompleted')->name('tasks.completed');
 Route::get('/tasks/add', 'TaskController@add')->name('tasks.add');
 Route::post('/tasks/add', 'TaskController@addProcess')->name('tasks.add');
 Route::get('/tasks/{task}/delete', 'TaskController@delete')->name('tasks.delete');

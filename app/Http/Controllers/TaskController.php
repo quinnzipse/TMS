@@ -17,10 +17,25 @@ class TaskController extends Controller
         $this->middleware('auth');
     }
 
-    static function index(){
-        $tasks = Task::where('uid', '=', Auth::user()->id)->orderBy('end_date', 'asc')->orderBy('priority', 'asc')->orderBy('est_Minutes', 'asc')->get();
+    static function index($tasks = null, $callerID = null){
+        if(!$tasks) $tasks = Task::where('uid', '=', Auth::user()->id)->orderBy('end_date', 'asc')->orderBy('priority', 'asc')->orderBy('est_Minutes', 'asc')->get();
+        if(!$callerID) $callerID = 0;
 
-        return view('tasks/index', ['tasks' => $tasks]);
+        return view('tasks/index', ['tasks' => $tasks, 'callerID' => $callerID]);
+    }
+
+    function indexCompleted(){
+        $tasks = Task::withTrashed()->where('uid', '=', Auth::user()->id)->orderBy('end_date', 'asc')
+            ->orderBy('priority', 'asc')->orderBy('est_Minutes', 'asc')->get();
+
+        return $this::index($tasks, 2);
+    }
+
+    function indexOverdue(){
+        $tasks = Task::where([ ['uid', '=', Auth::user()->id], ['end_date', '<', Carbon::today()] ])->orderBy('end_date', 'asc')
+            ->orderBy('priority', 'asc')->orderBy('est_Minutes', 'asc')->get();
+
+        return $this::index($tasks, 1);
     }
 
     function add(){
