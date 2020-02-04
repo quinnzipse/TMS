@@ -28,7 +28,7 @@ class TaskController extends Controller
         $tasks = Task::withTrashed()->where('uid', '=', Auth::user()->id)->orderBy('end_date', 'asc')
             ->orderBy('priority', 'asc')->orderBy('est_Minutes', 'asc')->get();
 
-        return $this::index($tasks, 2);
+        return view('tasks.completed', ['tasks' => $tasks]);
     }
 
     function indexOverdue(){
