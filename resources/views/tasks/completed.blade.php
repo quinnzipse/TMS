@@ -41,7 +41,7 @@
                     <td>{{$t->category}}</td>
                     <td>{{$t->priority}}</td>
                     <td id="min{{$t->id}}">{{$t->est_minutes}} mins</td>
-                    <td>{{$t->flag}}</td>
+                    <td>{{$t-v>flag}}</td>
                     <td class="mr-0 pr-1 pl-1">
                         <button type="button" onclick=""
                                 class="btn btn-outline-secondary btn-sm"><i class="far fa-eye"></i></button>
