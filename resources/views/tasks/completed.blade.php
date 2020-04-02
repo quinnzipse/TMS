@@ -43,15 +43,15 @@
                     <td id="min{{$t->id}}">{{$t->est_minutes}} mins</td>
                     <td>{{$t-v>flag}}</td>
                     <td class="mr-0 pr-1 pl-1">
-                        <button type="button" onclick=""
+                        <button type="button" onclick="inqure({{$t->id}})"
                                 class="btn btn-outline-secondary btn-sm"><i class="far fa-eye"></i></button>
                     </td>
                     <td class="mr-0 pr-1 pl-1">
-                        <button type="button" onclick=""
+                        <button type="button" onclick="restoreTask({{$t->id}})"
                                 class="btn btn-outline-primary btn-sm"><i class="fas fa-box-open"></i></button>
                     </td>
                     <td class="ml-0 mr-0 pr-1 pl-1">
-                        <button type="button" onclick=""
+                        <button type="button" onclick="deleteTask({{$t->id}})"
                                 class="btn btn-outline-danger btn-sm"><i class="fas fa-eraser"></i></button>
                     </td>
                 </tr>
@@ -62,5 +62,16 @@
     </div>
 
     <script>
+        function inquire(id){
+
+        }
+
+        function deleteTask(id){
+            // confirm delete
+        }
+
+        function restoreTask(id){
+
+        }
     </script>
 @endsection
