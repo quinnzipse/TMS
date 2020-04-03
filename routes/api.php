@@ -17,9 +17,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Auth Routes
+Route::post('/register', 'Api\AuthController@register');
+Route::post('/login', 'Api\AuthController@login');
+
 // List tasks
-Route::get('tasks', 'TaskApiController@index');
-Route::get('task/{id}', 'TaskApiController@show');
-Route::post('task', 'TaskApiController@store');
-Route::put('task', 'TaskApiController@store');
-Route::delete('task/{id}', 'TaskApiController@destroy');
+Route::get('tasks', 'Api\TaskApiController@index');
+Route::get('task/{id}', 'Api\TaskApiController@show');
+Route::post('task', 'Api\TaskApiController@store');
+Route::put('task', 'Api\TaskApiController@store');
+Route::delete('task/{id}', 'Api\TaskApiController@destroy');
