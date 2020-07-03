@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Task;
 use App\Http\Resources\Task as TaskResource;
@@ -16,7 +17,7 @@ class TaskApiController extends Controller
     public function index()
     {
         // Get tasks
-        $tasks = Task::paginate(15)->withTrashed();
+        $tasks = Task::get();
 
         // Return the collection of Tasks as a resource
         return TaskResource::collection($tasks);

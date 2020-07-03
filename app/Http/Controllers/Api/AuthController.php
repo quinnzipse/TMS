@@ -4,21 +4,20 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\User;
-use Illuminate\Foundation\Console\PackageDiscoverCommand;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
     public function register(Request $request){
-        $validataedData = $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|max:55',
             'email' => 'email|required|unique:users',
             'password'=>'required|confirmed'
         ]);
 
-        $validataedData['password'] = bcrypt($request->password);
+        $validatedData['password'] = bcrypt($request->password);
 
-        $user = User::create($validataedData);
+        $user = User::create($validatedData);
 
         $accessToken = $user->createToken('authToken')->accessToken;
 

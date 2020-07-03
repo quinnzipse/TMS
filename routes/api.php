@@ -22,8 +22,8 @@ Route::post('/register', 'Api\AuthController@register');
 Route::post('/login', 'Api\AuthController@login');
 
 // List tasks
-Route::get('tasks', 'Api\TaskApiController@index');
-Route::get('task/{id}', 'Api\TaskApiController@show');
-Route::post('task', 'Api\TaskApiController@store');
-Route::put('task', 'Api\TaskApiController@store');
-Route::delete('task/{id}', 'Api\TaskApiController@destroy');
+Route::get('/tasks', 'Api\TaskApiController@index');
+Route::get('/task/{id}', 'Api\TaskApiController@show');
+Route::post('/task', 'Api\TaskApiController@store');
+Route::put('/task', 'Api\TaskApiController@store');
+Route::delete('/task/{id}', 'Api\TaskApiController@destroy');
