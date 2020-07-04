@@ -9,10 +9,9 @@
         <div class="row">
             <div class="col-12">
                 <h3 class="mb-0 float-left mt-2"><i class="fas fa-tasks"></i> Tasks </h3>
-                <button href="{{route('tasks.add')}}" class="btn btn-outline-success float-right"><i
-                        class="fas fa-plus"></i> Add
-                    Task
-                </button>
+                <a href="{{route('tasks.add')}}" class="btn btn-outline-success float-right"><i
+                        class="fas fa-plus"></i> Add Task
+                </a>
             </div>
         </div>
         <hr class="mt-2 mb-2">
